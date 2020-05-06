@@ -8,18 +8,19 @@ namespace SQLiteDBMS
 {
     public partial class AddDebt : Form
     {
+        DataTable table = new DataTable();
         public AddDebt()
         {
             InitializeComponent();
             string path = ConfigurationManager.AppSettings.Get("DataBasePath");
             SQLiteConnection Connect = new SQLiteConnection(@"Data Source=" + path);
-            DataTable table = new DataTable();
+            
             SQLiteDataAdapter adt = new SQLiteDataAdapter("select * from Person", Connect);
             adt.Fill(table);
             PersonBox.DataSource = table;
-            PersonBox.DisplayMember = "id";
+            PersonBox.DisplayMember = "Name";
             PersonBox.DropDownStyle = ComboBoxStyle.DropDownList;
-            
+            LoanPeaker.Value = DateTime.Now;
         }
 
         private void InsertDebt_Click(object sender, EventArgs e)
@@ -33,7 +34,13 @@ namespace SQLiteDBMS
             SQLiteCommand command = Connect.CreateCommand();
             command.CommandText = "INSERT INTO Debts([Amount], [Person_id], [On loan from]) VALUES (@Amount,@id,@Loan)";
             command.Parameters.Add(new SQLiteParameter("@Amount", AmountBox.Text));
-            command.Parameters.Add(new SQLiteParameter("@id", PersonBox.Text));
+            string currId = "";
+            foreach (DataRow tmp in table.Rows) {
+                if (tmp.ItemArray[1].ToString() == PersonBox.Text) {
+                    currId = tmp.ItemArray[0].ToString();
+                }
+            }
+            command.Parameters.Add(new SQLiteParameter("@id", currId));
             command.Parameters.Add(new SQLiteParameter("@Loan", LoanPeaker.Value));
             Connect.Open();
             command.ExecuteNonQuery();

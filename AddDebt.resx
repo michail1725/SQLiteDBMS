@@ -126,13 +126,13 @@
     <value>19, 14</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>182, 13</value>
+    <value>186, 13</value>
   </data>
   <data name="label1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>Добавить запись в таблицу Debts:</value>
+    <value>Добавить запись в таблицу Долги:</value>
   </data>
   <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>
@@ -219,13 +219,13 @@
     <value>19, 33</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>46, 13</value>
+    <value>81, 13</value>
   </data>
   <data name="label2.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
-    <value>Amount:</value>
+    <value>Размер долга:</value>
   </data>
   <data name="&gt;&gt;label2.Name" xml:space="preserve">
     <value>label2</value>
@@ -246,13 +246,13 @@
     <value>172, 32</value>
   </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>51, 13</value>
+    <value>57, 13</value>
   </data>
   <data name="label3.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
-    <value>Person id</value>
+    <value>Должник:</value>
   </data>
   <data name="&gt;&gt;label3.Name" xml:space="preserve">
     <value>label3</value>
@@ -273,13 +273,13 @@
     <value>329, 32</value>
   </data>
   <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>70, 13</value>
+    <value>62, 13</value>
   </data>
   <data name="label4.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
   </data>
   <data name="label4.Text" xml:space="preserve">
-    <value>On loan from:</value>
+    <value>Долг взят:</value>
   </data>
   <data name="&gt;&gt;label4.Name" xml:space="preserve">
     <value>label4</value>
@@ -334,7 +334,7 @@
     <value>CenterScreen</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>AddDebt</value>
+    <value>Добавить долг</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>AddDebt</value>

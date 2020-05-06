@@ -34,6 +34,7 @@
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.Add = new System.Windows.Forms.Button();
             this.ChangeData = new System.Windows.Forms.Button();
+            this.Export = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -71,8 +72,8 @@
             // 
             this.TableChoice.FormattingEnabled = true;
             this.TableChoice.Items.AddRange(new object[] {
-            "Person",
-            "Debts"});
+            "Люди",
+            "Долги"});
             this.TableChoice.Location = new System.Drawing.Point(19, 27);
             this.TableChoice.Name = "TableChoice";
             this.TableChoice.Size = new System.Drawing.Size(150, 21);
@@ -114,11 +115,23 @@
             this.ChangeData.UseVisualStyleBackColor = true;
             this.ChangeData.Click += new System.EventHandler(this.ChangeData_Click);
             // 
+            // Export
+            // 
+            this.Export.Enabled = false;
+            this.Export.Location = new System.Drawing.Point(271, 406);
+            this.Export.Name = "Export";
+            this.Export.Size = new System.Drawing.Size(154, 24);
+            this.Export.TabIndex = 8;
+            this.Export.Text = "Экспортировать в Excel";
+            this.Export.UseVisualStyleBackColor = true;
+            this.Export.Click += new System.EventHandler(this.Export_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(440, 412);
+            this.ClientSize = new System.Drawing.Size(440, 432);
+            this.Controls.Add(this.Export);
             this.Controls.Add(this.ChangeData);
             this.Controls.Add(this.Add);
             this.Controls.Add(this.checkBox1);
@@ -126,8 +139,8 @@
             this.Controls.Add(this.DeleteButton);
             this.Controls.Add(this.dataGridView1);
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(456, 451);
-            this.MinimumSize = new System.Drawing.Size(456, 451);
+            this.MaximumSize = new System.Drawing.Size(456, 471);
+            this.MinimumSize = new System.Drawing.Size(456, 471);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Список должников";
@@ -145,6 +158,7 @@
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.Button Add;
         private System.Windows.Forms.Button ChangeData;
+        private System.Windows.Forms.Button Export;
     }
 }
 

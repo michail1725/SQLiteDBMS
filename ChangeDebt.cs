@@ -9,24 +9,25 @@ namespace SQLiteDBMS
     public partial class ChangeDebt : Form
     {
         int updID;
+        DataTable table = new DataTable();
         public ChangeDebt(int id)
         {
             InitializeComponent();
             updID = id;
             string path = ConfigurationManager.AppSettings.Get("DataBasePath");
             SQLiteConnection Connect = new SQLiteConnection(@"Data Source=" + path);
-            DataTable table = new DataTable();
-            SQLiteDataAdapter adt = new SQLiteDataAdapter("select * from Person", Connect);
-            adt.Fill(table);
-            PersonBox.DataSource = table;
-            PersonBox.DisplayMember = "id";
-            adt = new SQLiteDataAdapter("select [Amount], [Person_id], [On loan from] from Debts where [id] =" + updID, Connect);
-            table = new DataTable();
+            SQLiteDataAdapter adt = new SQLiteDataAdapter("select [Amount], [Person_id], [On loan from] from Debts where [id] =" + updID, Connect);
             adt.Fill(table);
             AmountBox.Text = Convert.ToString(table.Rows[0].ItemArray[0]);
             PersonBox.Text = Convert.ToString(table.Rows[0].ItemArray[1]);
             PersonBox.DropDownStyle = ComboBoxStyle.DropDownList;
             LoanPeaker.Text = Convert.ToDateTime(table.Rows[0].ItemArray[2]).ToString("dd.MM.yyyy");
+            table = new DataTable();
+            adt = new SQLiteDataAdapter("select * from Person", Connect);
+            adt.Fill(table);
+            PersonBox.DataSource = table;
+            PersonBox.DisplayMember = "Name";
+            
         }
 
         private void UpdateDebt_Click(object sender, EventArgs e)
@@ -41,7 +42,15 @@ namespace SQLiteDBMS
             SQLiteCommand command = Connect.CreateCommand();
             command.CommandText = "UPDATE Debts SET [Amount] = @Amount, [Person_id] = @id, [On loan from] = @Loan WHERE[id] = "+ updID;
             command.Parameters.Add(new SQLiteParameter("@Amount", AmountBox.Text));
-            command.Parameters.Add(new SQLiteParameter("@id", PersonBox.Text));
+            string currId = "";
+            foreach (DataRow tmp in table.Rows)
+            {
+                if (tmp.ItemArray[1].ToString() == PersonBox.Text)
+                {
+                    currId = tmp.ItemArray[0].ToString();
+                }
+            }
+            command.Parameters.Add(new SQLiteParameter("@id", currId));
             command.Parameters.Add(new SQLiteParameter("@Loan", LoanPeaker.Value));
             Connect.Open();
             command.ExecuteNonQuery();

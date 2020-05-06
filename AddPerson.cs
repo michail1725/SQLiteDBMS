@@ -31,5 +31,12 @@ namespace SQLiteDBMS
             MessageBox.Show("Успешно добавлено!");
             ActiveForm.Close();
         }
+        private void ValidateNumber(object sender, KeyPressEventArgs e)
+        {
+            if (Char.IsDigit(e.KeyChar) || e.KeyChar == Convert.ToChar(Keys.Back)) return;
+            else
+                e.Handled = true;
+        }
     }
+    
 }

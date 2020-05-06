@@ -41,9 +41,9 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(9, 15);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(190, 13);
+            this.label1.Size = new System.Drawing.Size(185, 13);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Добавить запись в таблицу Person: ";
+            this.label1.Text = "Добавить запись в таблицу Люди: ";
             // 
             // InsertPerson
             // 
@@ -67,9 +67,9 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(9, 45);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(38, 13);
+            this.label2.Size = new System.Drawing.Size(32, 13);
             this.label2.TabIndex = 4;
-            this.label2.Text = "Name:";
+            this.label2.Text = "Имя:";
             // 
             // PhoneBox
             // 
@@ -77,15 +77,16 @@
             this.PhoneBox.Name = "PhoneBox";
             this.PhoneBox.Size = new System.Drawing.Size(136, 20);
             this.PhoneBox.TabIndex = 5;
+            this.PhoneBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ValidateNumber);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(185, 43);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(79, 13);
+            this.label3.Size = new System.Drawing.Size(96, 13);
             this.label3.TabIndex = 6;
-            this.label3.Text = "Phone number:";
+            this.label3.Text = "Номер телефона:";
             // 
             // AddPerson
             // 
@@ -104,7 +105,7 @@
             this.MinimumSize = new System.Drawing.Size(349, 171);
             this.Name = "AddPerson";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "AddPerson";
+            this.Text = "Добавить должника";
             this.ResumeLayout(false);
             this.PerformLayout();
 

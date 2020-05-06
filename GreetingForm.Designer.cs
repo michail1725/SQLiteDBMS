@@ -31,6 +31,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.StartButton = new System.Windows.Forms.Button();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // label2
@@ -55,7 +56,7 @@
             // 
             // StartButton
             // 
-            this.StartButton.Location = new System.Drawing.Point(153, 122);
+            this.StartButton.Location = new System.Drawing.Point(147, 102);
             this.StartButton.Name = "StartButton";
             this.StartButton.Size = new System.Drawing.Size(157, 32);
             this.StartButton.TabIndex = 3;
@@ -63,11 +64,22 @@
             this.StartButton.UseVisualStyleBackColor = true;
             this.StartButton.Click += new System.EventHandler(this.StartButton_Click);
             // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(117, 140);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(216, 17);
+            this.checkBox1.TabIndex = 6;
+            this.checkBox1.Text = "Не показывать это окно при запуске";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
             // GreetingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(442, 169);
+            this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.StartButton);
@@ -88,5 +100,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button StartButton;
+        private System.Windows.Forms.CheckBox checkBox1;
     }
 }

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows.Forms;
-
 namespace SQLiteDBMS
 {
     static class Program
@@ -14,7 +13,14 @@ namespace SQLiteDBMS
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Context = new ApplicationContext(new GreetingForm());
+            var settings = Properties.Settings.Default;
+            if (!settings.greetingNecessity)
+            {
+                Context = new ApplicationContext(new MainForm());
+            }
+            else { 
+                Context = new ApplicationContext(new GreetingForm());
+            }
             Application.Run(Context);
         }
     }

@@ -5,12 +5,12 @@ using System.IO;
 using System.Data.SQLite;
 using System.Windows.Forms;
 
+
 namespace SQLiteDBMS
 {
     public partial class MainForm : Form
     {
-        
-        public DataSet ds;
+        DataSet ds;
         SQLiteDataAdapter adapter;
         SQLiteCommandBuilder commandBuilder;
         SQLiteConnection Connect;
@@ -65,14 +65,15 @@ namespace SQLiteDBMS
         }
 
         private void GetTableSet(object sender, EventArgs e)
-        {
+        {/*, SUM(Debts.Amount) AS [Суммарный долг]*/
+            Export.Enabled = true;
             string sql;
-            if (TableChoice.Text == "Person") {
-                sql = "SELECT * FROM Person";
+            if (TableChoice.Text == "Люди") {
+                sql = "SELECT [id],[Name] AS [Имя],[Phone number] AS [Номер телефона],(SELECT SUM(Amount) From Debts Where Person.id = Debts.Person_id Group by Person_id) AS [Суммарный долг] FROM Person";
                 
             }
             else{
-                sql = "SELECT * FROM Debts";
+                sql = "SELECT [id],[Amount] AS [Размер долга],[Person_id] AS [id Должника],[On loan from] AS [Долг взят] FROM Debts";
             }
             using (Connect = new SQLiteConnection(@"Data Source=" + path))
             {
@@ -81,6 +82,7 @@ namespace SQLiteDBMS
                 ds = new DataSet();
                 adapter.Fill(ds);
                 dataGridView1.DataSource = ds.Tables[0];
+                
             }
             if (checkBox1.Checked == false) {
                 Add.Enabled = true;
@@ -131,7 +133,7 @@ namespace SQLiteDBMS
     
         private void Add_Click(object sender, EventArgs e)
         {
-            if (TableChoice.Text == "Person")
+            if (TableChoice.Text == "Люди")
             {
                 AddPerson addPerson = new AddPerson();
                 addPerson.ShowDialog();
@@ -157,7 +159,7 @@ namespace SQLiteDBMS
         private void ChangeData_Click(object sender, EventArgs e)
         {
             int id = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[0].Value);
-            if (TableChoice.Text == "Person")
+            if (TableChoice.Text == "Люди")
             {
                 ChangePerson changePerson = new ChangePerson(id);
                 changePerson.ShowDialog();
@@ -181,6 +183,25 @@ namespace SQLiteDBMS
                     DeleteButton.Enabled = true;
                 }
             }
+        }
+
+        private void Export_Click(object sender, EventArgs e)
+        {
+            Microsoft.Office.Interop.Excel.Application ExcelApp = new Microsoft.Office.Interop.Excel.Application();
+            Microsoft.Office.Interop.Excel.Workbook ExcelWorkBook;
+            Microsoft.Office.Interop.Excel.Worksheet ExcelWorkSheet;
+            ExcelWorkBook = ExcelApp.Workbooks.Add(System.Reflection.Missing.Value);
+            ExcelWorkSheet = (Microsoft.Office.Interop.Excel.Worksheet)ExcelWorkBook.Worksheets.get_Item(1);
+
+            for (int i = 0; i < dataGridView1.Rows.Count; i++)
+            {
+                for (int j = 0; j < dataGridView1.ColumnCount; j++)
+                {
+                    ExcelApp.Cells[i + 1, j + 1] = dataGridView1.Rows[i].Cells[j].Value;
+                }
+            }
+            ExcelApp.Visible = true;
+            ExcelApp.UserControl = true;
         }
     }
 }
