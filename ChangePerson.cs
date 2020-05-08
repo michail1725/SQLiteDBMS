@@ -13,9 +13,9 @@ namespace SQLiteDBMS
             InitializeComponent();
             updID = id;
             string path = ConfigurationManager.AppSettings.Get("DataBasePath");
-            SQLiteConnection Connect = new SQLiteConnection(@"Data Source=" + path);
+            SQLiteConnection connect = new SQLiteConnection(@"Data Source=" + path);
             DataTable table = new DataTable();
-            SQLiteDataAdapter adt = new SQLiteDataAdapter("select [Name], [Phone number] from Person where [id] =" + updID, Connect);
+            SQLiteDataAdapter adt = new SQLiteDataAdapter("select [Name], [Phone number] from Person where [id] =" + updID, connect);
             adt.Fill(table);
             NameBox.Text = Convert.ToString(table.Rows[0].ItemArray[0]);
             PhoneBox.Text = Convert.ToString(table.Rows[0].ItemArray[1]);
@@ -29,14 +29,14 @@ namespace SQLiteDBMS
                 return;
             }
             string path = ConfigurationManager.AppSettings.Get("DataBasePath");
-            SQLiteConnection Connect = new SQLiteConnection(@"Data Source=" + path);
-            SQLiteCommand command = Connect.CreateCommand();
+            SQLiteConnection connect = new SQLiteConnection(@"Data Source=" + path);
+            SQLiteCommand command = connect.CreateCommand();
             command.CommandText = "UPDATE Person SET [Name] = @Name,[Phone number] = @Phone WHERE [id] ="+ updID;
             command.Parameters.Add(new SQLiteParameter("@Name", NameBox.Text));
             command.Parameters.Add(new SQLiteParameter("@Phone", PhoneBox.Text));
-            Connect.Open();
+            connect.Open();
             command.ExecuteNonQuery();
-            Connect.Close();
+            connect.Close();
             MessageBox.Show("Успешно изменено!");
             ActiveForm.Close();
         }

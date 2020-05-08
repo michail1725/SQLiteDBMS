@@ -20,14 +20,14 @@ namespace SQLiteDBMS
                 return;
             }
             string path = ConfigurationManager.AppSettings.Get("DataBasePath");
-            SQLiteConnection Connect = new SQLiteConnection(@"Data Source=" + path);
-            SQLiteCommand command = Connect.CreateCommand();
+            SQLiteConnection connect = new SQLiteConnection(@"Data Source=" + path);
+            SQLiteCommand command = connect.CreateCommand();
             command.CommandText = "INSERT INTO Person([Name], [Phone number]) VALUES (@Name,@Phone)";
             command.Parameters.Add(new SQLiteParameter("@Name", NameBox.Text));
             command.Parameters.Add(new SQLiteParameter("@Phone", PhoneBox.Text));
-            Connect.Open();
+            connect.Open();
             command.ExecuteNonQuery();
-            Connect.Close();
+            connect.Close();
             MessageBox.Show("Успешно добавлено!");
             ActiveForm.Close();
         }

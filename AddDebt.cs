@@ -13,9 +13,9 @@ namespace SQLiteDBMS
         {
             InitializeComponent();
             string path = ConfigurationManager.AppSettings.Get("DataBasePath");
-            SQLiteConnection Connect = new SQLiteConnection(@"Data Source=" + path);
+            SQLiteConnection connect = new SQLiteConnection(@"Data Source=" + path);
             
-            SQLiteDataAdapter adt = new SQLiteDataAdapter("select * from Person", Connect);
+            SQLiteDataAdapter adt = new SQLiteDataAdapter("select * from Person", connect);
             adt.Fill(table);
             PersonBox.DataSource = table;
             PersonBox.DisplayMember = "Name";
@@ -30,8 +30,8 @@ namespace SQLiteDBMS
                 return;
             }
             string path = ConfigurationManager.AppSettings.Get("DataBasePath");
-            SQLiteConnection Connect = new SQLiteConnection(@"Data Source=" + path);
-            SQLiteCommand command = Connect.CreateCommand();
+            SQLiteConnection connect = new SQLiteConnection(@"Data Source=" + path);
+            SQLiteCommand command = connect.CreateCommand();
             command.CommandText = "INSERT INTO Debts([Amount], [Person_id], [On loan from]) VALUES (@Amount,@id,@Loan)";
             command.Parameters.Add(new SQLiteParameter("@Amount", AmountBox.Text));
             string currId = "";
@@ -42,9 +42,9 @@ namespace SQLiteDBMS
             }
             command.Parameters.Add(new SQLiteParameter("@id", currId));
             command.Parameters.Add(new SQLiteParameter("@Loan", LoanPeaker.Value));
-            Connect.Open();
+            connect.Open();
             command.ExecuteNonQuery();
-            Connect.Close();
+            connect.Close();
             MessageBox.Show("Успешно добавлено!");
             ActiveForm.Close();
         }

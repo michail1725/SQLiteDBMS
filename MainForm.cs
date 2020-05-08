@@ -13,7 +13,7 @@ namespace SQLiteDBMS
         DataSet ds;
         SQLiteDataAdapter adapter;
         SQLiteCommandBuilder commandBuilder;
-        SQLiteConnection Connect;
+        SQLiteConnection connect;
         SQLiteCommand cmd;
         string path;
         public MainForm()
@@ -25,17 +25,17 @@ namespace SQLiteDBMS
                 SQLiteConnection.CreateFile(path); 
             }
             
-            using (Connect = new SQLiteConnection(@"Data Source=" + path)) {
+            using (connect = new SQLiteConnection(@"Data Source=" + path)) {
                 string commandText = "CREATE TABLE IF NOT EXISTS [Person] ([id] INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, [Name] VARCHAR(45), [Phone number] VARCHAR(45))";
-                SQLiteCommand Command = new SQLiteCommand(commandText, Connect);
-                Connect.Open();
+                SQLiteCommand Command = new SQLiteCommand(commandText, connect);
+                connect.Open();
                 Command.ExecuteNonQuery();
-                Connect.Close();
-                Connect.Open();
+                connect.Close();
+                connect.Open();
                 commandText = "CREATE TABLE IF NOT EXISTS [Debts] ([id] INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,[Amount] INTEGER,[Person_id] INTEGER NOT NULL,[On loan from] DATE, FOREIGN KEY ([Person_id]) REFERENCES [Person]([id]))";
-                Command = new SQLiteCommand(commandText, Connect);
+                Command = new SQLiteCommand(commandText, connect);
                 Command.ExecuteNonQuery();
-                Connect.Close();
+                connect.Close();
             }
             TableChoice.DropDownStyle = ComboBoxStyle.DropDownList;
         }
@@ -43,18 +43,18 @@ namespace SQLiteDBMS
 
         private void SaveAll(object sender, EventArgs e)
         {
-            using (Connect = new SQLiteConnection(@"Data Source=" + path))
+            using (connect = new SQLiteConnection(@"Data Source=" + path))
             {
                 try
                 {
-                    Connect.Open();
-                    cmd = Connect.CreateCommand();
+                    connect.Open();
+                    cmd = connect.CreateCommand();
                     cmd.CommandText = string.Format("SELECT * FROM {0}", TableChoice.Text);
                     adapter = new SQLiteDataAdapter(cmd);
                     commandBuilder = new SQLiteCommandBuilder(adapter);
                     adapter.UpdateCommand = commandBuilder.GetUpdateCommand();
                     adapter.Update(ds.Tables[0]);
-                    Connect.Close();
+                    connect.Close();
                 }
                 catch (Exception Ex)
                 {
@@ -65,7 +65,7 @@ namespace SQLiteDBMS
         }
 
         private void GetTableSet(object sender, EventArgs e)
-        {/*, SUM(Debts.Amount) AS [Суммарный долг]*/
+        {
             Export.Enabled = true;
             string sql;
             if (TableChoice.Text == "Люди") {
@@ -75,10 +75,10 @@ namespace SQLiteDBMS
             else{
                 sql = "SELECT [id],[Amount] AS [Размер долга],[Person_id] AS [id Должника],[On loan from] AS [Долг взят] FROM Debts";
             }
-            using (Connect = new SQLiteConnection(@"Data Source=" + path))
+            using (connect = new SQLiteConnection(@"Data Source=" + path))
             {
-                Connect.Open();
-                adapter = new SQLiteDataAdapter(sql, Connect);
+                connect.Open();
+                adapter = new SQLiteDataAdapter(sql, connect);
                 ds = new DataSet();
                 adapter.Fill(ds);
                 dataGridView1.DataSource = ds.Tables[0];
@@ -141,9 +141,9 @@ namespace SQLiteDBMS
             }
             else
             {
-                SQLiteConnection Connect = new SQLiteConnection(@"Data Source=" + path);
+                SQLiteConnection connect = new SQLiteConnection(@"Data Source=" + path);
                 DataTable table = new DataTable();
-                SQLiteDataAdapter adt = new SQLiteDataAdapter("select * from Person", Connect);
+                SQLiteDataAdapter adt = new SQLiteDataAdapter("select * from Person", connect);
                 adt.Fill(table);
                 if (table.Rows.Count == 0)
                 {

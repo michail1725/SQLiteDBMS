@@ -17,17 +17,6 @@ E:\Solutions\SQLiteDBMS\obj\Debug\SQLiteDBMS.csproj.GenerateResource.cache
 E:\Solutions\SQLiteDBMS\obj\Debug\SQLiteDBMS.csproj.CopyComplete
 E:\Solutions\SQLiteDBMS\obj\Debug\SQLiteDBMS.exe
 E:\Solutions\SQLiteDBMS\obj\Debug\SQLiteDBMS.pdb
-E:\Solutions\SQLiteDBMS\bin\Debug\Microsoft.Data.Sqlite.dll
-E:\Solutions\SQLiteDBMS\bin\Debug\SQLitePCLRaw.core.dll
-E:\Solutions\SQLiteDBMS\bin\Debug\System.Buffers.dll
-E:\Solutions\SQLiteDBMS\bin\Debug\System.Memory.dll
-E:\Solutions\SQLiteDBMS\bin\Debug\System.Numerics.Vectors.dll
-E:\Solutions\SQLiteDBMS\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
-E:\Solutions\SQLiteDBMS\bin\Debug\Microsoft.Data.Sqlite.xml
-E:\Solutions\SQLiteDBMS\bin\Debug\System.Buffers.xml
-E:\Solutions\SQLiteDBMS\bin\Debug\System.Memory.xml
-E:\Solutions\SQLiteDBMS\bin\Debug\System.Numerics.Vectors.xml
-E:\Solutions\SQLiteDBMS\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 E:\Solutions\SQLiteDBMS\obj\Debug\SQLiteDBMS.AddDebt.resources
 E:\Solutions\SQLiteDBMS\obj\Debug\SQLiteDBMS.AddPerson.resources
 E:\Solutions\SQLiteDBMS\obj\Debug\SQLiteDBMS.ChangeDebt.resources
